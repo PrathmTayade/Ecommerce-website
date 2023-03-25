@@ -1,7 +1,14 @@
+"use client"
 import React from "react";
+import CartLayout from "./layout";
 
-function page() {
-  return <div>Cart page</div>;
+function Page() {
+  return (
+      <div>
+        <div>cart laoading</div>
+        
+      </div>
+  );
 }
 
-export default page;
+export default Page;

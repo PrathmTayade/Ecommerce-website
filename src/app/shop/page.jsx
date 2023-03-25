@@ -1,5 +1,8 @@
 import Collections from "@/components/Collections";
+import getCollections from "@/lib/getCollections";
 import Image from "next/image";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 // const fetchlog = {
 //   data: {
@@ -21,21 +24,16 @@ import Image from "next/image";
 // };
 
 export default async function Shop() {
-  const request = await fetch(
-    "https://mock.shop/api?query={collections(first:%2010){edges%20{node%20{id%20handle%20title%20image%20{altText%20url}}}}}"
-  );
-  const response = await request.json();
-  const collections = await response.data.collections;
+  const collections = await getCollections()
   return (
-    <div className="container flex-1 w-screen scroll-smooth ">
-      <div className=" flex  grid-flow-row grid-cols-fluid  flex-col justify-center bg-slate-50 gap-6 p-6 text-gray-900  dark:bg-slate-900 dark:text-slate-100  md:grid md:grid-cols-3    ">
-        {collections.edges.map((col ,id) => (
-          <div key={id}>
-
-            <Collections col={col} />
-          </div>
-        ))}
+      <div className="container flex-1 w-screen scroll-smooth ">
+        <div className=" flex  grid-flow-row grid-cols-fluid  flex-col justify-center bg-slate-50 gap-6 p-6 text-gray-900  dark:bg-slate-900 dark:text-slate-100  md:grid md:grid-cols-3    ">
+          {collections.edges.map((col, id) => (
+            <div key={id}>
+              <Collections col={col} />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
   );
 }

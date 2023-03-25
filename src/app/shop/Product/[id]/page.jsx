@@ -24,7 +24,6 @@ async function Page({ params }) {
       ></img> */}
 
       <section className="h-fit flex-col flex-1 gap-8 sm:flex sm:flex-row sm:gap-4 sm:h-full  sm:mx-2 md:gap-8 md:mx-4 lg:flex-col lg:mx-0">
-        {/* <section className="flex-1"> */}
         <div className="relative flex items-center bg-orange-500 sm:bg-transparent ">
           <button
             className="bg-white w-10 h-10 flex items-center justify-center pr-1 rounded-full absolute left-6 z-10 sm:hidden"

@@ -9,13 +9,15 @@ function ProductCard({ product }) {
     <div className="flex justify-center m-2 ">
       <div className="block max-w-sm rounded-lg bg-white shadow-lg dark:bg-neutral-700">
         <Link href={`/shop/${newProd}`}>
-          {/* <Image
+          <Image
             src={product.featuredImage.url}
             alt="product image"
-            height={500}
-            width={500}
-          /> */}
-          <img src={product.featuredImage.url} alt="product img" />
+            height={1024}
+            width={1024}
+            placeholder="empty"
+            sizes="(min-width: 1200px) 715px, (min-width: 990px) calc(65.0vw - 10rem), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw / 1 - 4rem)"
+          />
+          {/* <img src={product.featuredImage.url} alt="product img" /> */}
         </Link>
         <div className="p-6">
           <div className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
