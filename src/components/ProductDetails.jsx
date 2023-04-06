@@ -1,35 +1,42 @@
 "use client";
-import { addToCart, removeFromCart } from "@/reducers/cartSlice";
+import {
+  addToCart,
+  cartSelector,
+  increase,
+  decrease,
+  removeFromCart,
+} from "@/reducers/cartSlice";
 import Image from "next/image";
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { usePathname } from "next/navigation";
 
-function ProductDetails({ data }) {
-  const [quantity, setQuantity] = useState(1);
+function ProductDetails({ data, id }) {
   const dispatch = useDispatch();
-  const cartItem = useSelector((state) => state.cart.items);
+  const cart = useSelector(cartSelector);
+
+  const pathname = usePathname();
   const item = {
+    id: id,
     title: data.product.title,
     image: data.product.images.edges[0].node.url,
-    quantity: quantity,
+    quantity: 1,
     price: data.product.variants.edges[0].node.price.amount * 50,
   };
+
   const addItem = () => {
     dispatch(addToCart(item));
+    // console.log(data)
   };
 
   const removeItem = () => {
-    console.log("remoc");
     dispatch(removeFromCart(item));
   };
   const decrement = () => {
-    if (quantity <= 1) {
-      return;
-    }
-    setQuantity((quantity) => quantity - 1);
+    dispatch(decrease({ id }));
   };
   const increment = () => {
-    setQuantity((quantity) => quantity + 1);
+    dispatch(increase({ id }));
   };
   return (
     <main className="w-full pt-4  flex flex-col lg:flex-row">
@@ -42,6 +49,27 @@ function ProductDetails({ data }) {
         width="1946"
         height="1946"
       ></img> */}
+      <div className="flex">
+        {/* {pathname
+          .split("/")
+          .slice(1)
+          .map((segment) => {
+            return (
+              <div key={segment}>
+                <span>
+                  <span
+                    key={segment}
+                    className="animate-[highlight_1s_ease-in-out_1] rounded-full px-1.5 py-0.5  dark:text-zinc-100"
+                  >
+                    {segment}
+                  </span>
+                </span>
+
+                <span className="text-zinc-600">/</span>
+              </div>
+            );
+          })} */}
+      </div>
 
       <section className="h-fit flex-col flex-1 gap-8 sm:flex sm:flex-row sm:gap-4 sm:h-full  sm:mx-2 md:gap-8 md:mx-4 lg:flex-col lg:mx-0">
         <div className="relative flex items-center bg-orange-500 sm:bg-transparent ">
@@ -148,7 +176,7 @@ function ProductDetails({ data }) {
               </svg>
             </button>
             <span id="amount" className="select-none">
-              {quantity}
+              {cart.quantity}
             </span>
             <div id="plus" className="w-fit" onClick={increment}>
               <svg
@@ -173,6 +201,15 @@ function ProductDetails({ data }) {
               </svg>
             </div>
           </div>
+
+          <button
+            type="button"
+            onClick={removeItem}
+            className="w-full h-10 bg-orange-500 text-white py-2 flex items-center justify-center gap-4 text-xs rounded-lg font-bold text-light shadow-md shadow-orange-500 hover:brightness-125 transition select-none"
+          >
+            remove
+          </button>
+
           <button
             type="button"
             onClick={addItem}

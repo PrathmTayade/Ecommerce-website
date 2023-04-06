@@ -2,6 +2,7 @@
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { MoonIcon, SunIcon } from "./Icons";
 
 export default function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
@@ -11,16 +12,25 @@ export default function ThemeToggle() {
   useEffect(() => {
     setMounted(true);
   }, []);
+  const setThemeMode = () => {
+    theme === "light" ? setTheme("dark") : setTheme("light");
+  };
+
 
   if (!mounted) {
     return null;
   }
 
   return (
-    <select value={theme} onChange={(e) => setTheme(e.target.value)}>
-      <option value="system">System</option>
-      <option value="dark">Dark</option>
-      <option value="light">Light</option>
-    </select>
+    <div
+      onClick={setThemeMode}
+      className="ease  h-10 w-10  flex items-center justify-center rounded-full p-1 "
+    >
+      {theme === "dark" ? (
+        <SunIcon className="fill-black" />
+      ) : (
+        <MoonIcon className="fill-black" />
+      )}
+    </div>
   );
 }

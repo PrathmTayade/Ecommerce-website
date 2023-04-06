@@ -25,6 +25,9 @@ function ProductCard({ product }) {
           <div className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
             {product.title}
           </div>
+          <div>
+            
+          </div>
 
           <button
             type="button"

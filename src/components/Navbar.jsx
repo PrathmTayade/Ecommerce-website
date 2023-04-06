@@ -2,18 +2,19 @@
 import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
 import { useSelector } from "react-redux";
+import { cartSelector } from "@/reducers/cartSlice";
+import Cart from "./Cart";
 
 export default function Navbar() {
-  const cartItems = useSelector((state) => state.cart.items);
+  const cartItems = useSelector(cartSelector);
 
   return (
     <div className="fixed inset-x-0 top-0 z-50 flex h-20 items-center justify-between border-b border-slate-300 bg-white/75 shadow-sm backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900/75 ">
-      <div className="container px-6s  mx-auto flex w-full max-w-7xl items-center justify-between">
+      <div className="container px-6  mx-auto flex w-full max-w-7xl items-center justify-between">
         <Link href="/" className="">
           Home
         </Link>
-        <div className="md:hidden flex  gap-6 ">
-          <ThemeToggle />
+        <div className="md:hidden flex items-center gap-2">
           <Link href={"/shop"}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -21,7 +22,7 @@ export default function Navbar() {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-6 h-6"
+              className="w-8 h-8"
             >
               <path
                 strokeLinecap="round"
@@ -52,15 +53,16 @@ export default function Navbar() {
               {cartItems.length}
             </div>
           </div>
-        </div>
-        <div className="hidden gap-4 md:flex relative">
           <ThemeToggle />
+        </div>
+        <div className="hidden gap-4 md:flex items-center justify-center relative">
           <Link href={"/shop"}>Shop</Link>
           <Link href={"/about"}>About</Link>
           <Link href={"/cart"}> Cart</Link>
-          <div className=" bg-red-600 block text-center text-white rounded-full h-6 w-6 ">
+          <div className=" bg-gray-400 block text-center text-white rounded-full h-6 w-6 ">
             {cartItems.length}
           </div>
+          <ThemeToggle />
         </div>
       </div>
     </div>
