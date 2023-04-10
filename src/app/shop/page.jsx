@@ -24,16 +24,16 @@ import Loading from "./loading";
 // };
 
 export default async function Shop() {
-  const collections = await getCollections()
+  const collections = await getCollections();
   return (
-      <div className="container flex-1 w-screen scroll-smooth ">
-        <div className=" flex  grid-flow-row grid-cols-fluid  flex-col justify-center bg-slate-50 gap-6 p-6 text-gray-900  dark:bg-slate-900 dark:text-slate-100  md:grid md:grid-cols-3    ">
-          {collections.edges.map((col, id) => (
-            <div key={id}>
-              <Collections col={col} />
-            </div>
-          ))}
-        </div>
+    <div className="container w-screen flex-1  ">
+      <div className=" flex  grid-flow-row grid-cols-fluid  flex-col justify-center gap-6 bg-slate-50 p-6 text-gray-900  dark:bg-slate-900 dark:text-slate-100  md:grid md:grid-cols-3    ">
+        {collections.edges.map((col, id) => (
+          <div key={id}>
+            <Collections col={col} />
+          </div>
+        ))}
       </div>
+    </div>
   );
 }
