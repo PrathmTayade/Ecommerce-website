@@ -4,8 +4,8 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState: {
     items: [
-      { id:"sadjias",  title: "prod 1", image: "image1", quantity: 1, price: 100 },
-      {id:"dsaodsad", title: "prod 2", image: "image2", quantity: 2, price: 100 },
+      // { id: "sadjias", title: "prod 1", image: "", quantity: 1, price: 100 },
+      // { id: "dsaodsad", title: "prod 2", image: "", quantity: 2, price: 100 },
     ],
     quantity: 1,
     amount: 0,
@@ -14,27 +14,34 @@ export const cartSlice = createSlice({
 
   reducers: {
     addToCart: (state, action) => {
-      state.items.push(action.payload);
+      const cartItem = state.items.find(
+        (item) => item.id === action.payload.id
+      );
+
+      if (cartItem) {
+        cartItem.quantity += 1;
+        return;
+      } else {
+        state.items.push(action.payload);
+      }
     },
     removeFromCart: (state, action) => {
-      state.items = state.items.filter(
-        (items) => items.title !== action.payload.title
-      );
+      state.items = state.items.filter((items) => items.id !== action.payload);
     },
-    increase: (state, { payload }) => {
-      const cartItem = state.items.find((item) => item.id === payload.id);
+    increase: (state, action) => {
+      const cartItem = state.items.find((item) => item.id === action.payload);
       cartItem.quantity += 1;
     },
-    decrease: (state, { payload }) => {
-      const cartItem = state.items.find((item) => item.id === payload.id);
+    decrease: (state, action) => {
+      const cartItem = state.items.find((item) => item.id === action.payload);
       cartItem.quantity -= 1;
     },
     calculateTotal: (state) => {
       let amount = 0;
       let total = 0;
       state.items.forEach((item) => {
-        amount += item.amount;
-        total = item.quantity * item.price;
+        amount = item.quantity * item.price;
+        total += amount;
       });
       state.total = total;
     },
@@ -43,6 +50,6 @@ export const cartSlice = createSlice({
 
 // console.log(cartSlice);
 export const cartSelector = (state) => state.cart;
-export const { addToCart, removeFromCart, increase, decrease } =
+export const { addToCart, removeFromCart, increase, decrease, calculateTotal } =
   cartSlice.actions;
 export default cartSlice.reducer;

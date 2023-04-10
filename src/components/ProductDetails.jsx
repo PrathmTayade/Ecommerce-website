@@ -30,7 +30,7 @@ function ProductDetails({ data, id }) {
   };
 
   const removeItem = () => {
-    dispatch(removeFromCart(item));
+    dispatch(removeFromCart(id));
   };
   const decrement = () => {
     dispatch(decrease({ id }));
@@ -39,7 +39,7 @@ function ProductDetails({ data, id }) {
     dispatch(increase({ id }));
   };
   return (
-    <main className="w-full pt-4  flex flex-col lg:flex-row">
+    <main className="flex w-full  flex-col pt-4 lg:flex-row">
       {/* Gallery */}
       {/* <img
         src="//cdn.shopify.com/s/files/1/0688/1755/1382/products/Whiteleathersneakers01.jpg?v=1675447604&amp;width=1946"
@@ -71,10 +71,10 @@ function ProductDetails({ data, id }) {
           })} */}
       </div>
 
-      <section className="h-fit flex-col flex-1 gap-8 sm:flex sm:flex-row sm:gap-4 sm:h-full  sm:mx-2 md:gap-8 md:mx-4 lg:flex-col lg:mx-0">
+      <section className="h-fit flex-1 flex-col gap-8 sm:mx-2 sm:flex sm:h-full sm:flex-row  sm:gap-4 md:mx-4 md:gap-8 lg:mx-0 lg:flex-col">
         <div className="relative flex items-center bg-orange-500 sm:bg-transparent ">
           <button
-            className="bg-white w-10 h-10 flex items-center justify-center pr-1 rounded-full absolute left-6 z-10 sm:hidden"
+            className="absolute left-6 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white pr-1 sm:hidden"
             id="previous-mobile"
           >
             <svg
@@ -94,7 +94,7 @@ function ProductDetails({ data, id }) {
             </svg>
           </button>
 
-          <div className="xl:w-[70%] sm:rounded-xl xl:rounded-xl m-auto pointer-events-none transition duration-300 lg:w-3/4 lg:pointer-events-auto lg:cursor-pointer lg:hover:shadow-xl">
+          <div className="pointer-events-none m-auto transition duration-300 sm:rounded-xl lg:pointer-events-auto lg:w-3/4 lg:cursor-pointer lg:hover:shadow-xl xl:w-[70%] xl:rounded-xl">
             <Image
               src={data.product.images.edges[0].node.url}
               alt="product"
@@ -102,12 +102,12 @@ function ProductDetails({ data, id }) {
               height={1946}
               sizes="(min-width: 1200px) 715px, (min-width: 990px) calc(65.0vw - 10rem), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw / 1 - 4rem)"
               placeholder="empty"
-              className="object-cover"
+              className="object-contain sm:rounded-xl"
             />
           </div>
 
           <button
-            className="bg-white w-10 h-10 flex items-center justify-center pl-1 rounded-full absolute right-6 z-10 sm:hidden"
+            className="absolute right-6 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white pl-1 sm:hidden"
             id="next-mobile"
           >
             <svg
@@ -129,91 +129,34 @@ function ProductDetails({ data, id }) {
         </div>
       </section>
       {/* Text */}
-      <section className="w-full flex-1 p-6  lg:pr-20 lg:py-10 2xl:pr-40 ">
-        <h4 className="font-bold text-orange-500 mb-2 uppercase text-xs tracking-widest">
+      <section className="w-full flex-1 p-6  lg:py-10 lg:pr-20 2xl:pr-40 ">
+        <h4 className="mb-2 text-xs font-bold uppercase tracking-widest text-orange-500">
           Product Company
         </h4>
-        <h1 className="text-very-dark mb-4 font-bold text-3xl lg:text-4xl">
+        <h1 className="text-very-dark mb-4 text-3xl font-bold lg:text-4xl">
           {data.product.title}
         </h1>
         <p className="text-dark-grayish mb-6 text-base sm:text-lg">
           {data.product.description}
         </p>
-        <div className="flex items-center justify-between mb-6 sm:flex-col sm:items-start">
+        <div className="mb-6 flex items-center justify-between sm:flex-col sm:items-start">
           <div className="flex items-center gap-4">
-            <h3 className="text-very-dark font-bold text-3xl  inline-block">
+            <h3 className="text-very-dark inline-block text-3xl  font-bold">
               ₹ {data.product.variants.edges[0].node.price.amount * 25}
             </h3>
-            <span className="inline-block h-fit py-0.5 px-2 font-bold bg-pale-orange-500 text-orange-500 rounded-lg text-sm">
+            <span className="bg-pale-orange-500 inline-block h-fit rounded-lg py-0.5 px-2 text-sm font-bold text-orange-500">
               50%
             </span>
           </div>
-          <p className="text-dark-grayish w-fit line-through decoration-dark-grayish decoration-1 my-auto">
+          <p className="text-dark-grayish decoration-dark-grayish my-auto w-fit line-through decoration-1">
             ₹ {data.product.variants.edges[0].node.price.amount * 50}
           </p>
         </div>
-        <div className="flex flex-col gap-5 mb-16 sm:flex-row lg:mb-0">
-          <div className="w-full h-10 text-sm border shadow-sm  px-3  flex items-center justify-between rounded-lg font-bold  sm:w-80">
-            <button
-              type="button"
-              id="minus"
-              className="h-full"
-              onClick={decrement}
-            >
-              <svg
-                width={12}
-                height={4}
-                xmlns="http://www.w3.org/2000/svg"
-                xmlnsXlink="http://www.w3.org/1999/xlink"
-              >
-                <defs>
-                  <path
-                    d="M11.357 3.332A.641.641 0 0 0 12 2.69V.643A.641.641 0 0 0 11.357 0H.643A.641.641 0 0 0 0 .643v2.046c0 .357.287.643.643.643h10.714Z"
-                    id="a"
-                  />
-                </defs>
-                <use fill="#FF7E1B" fillRule="nonzero" xlinkHref="#a" />
-              </svg>
-            </button>
-            <span id="amount" className="select-none">
-              {cart.quantity}
-            </span>
-            <div id="plus" className="w-fit" onClick={increment}>
-              <svg
-                width={12}
-                height={12}
-                xmlns="http://www.w3.org/2000/svg"
-                xmlnsXlink="http://www.w3.org/1999/xlink"
-                id="plus"
-              >
-                <defs>
-                  <path
-                    d="M12 7.023V4.977a.641.641 0 0 0-.643-.643h-3.69V.643A.641.641 0 0 0 7.022 0H4.977a.641.641 0 0 0-.643.643v3.69H.643A.641.641 0 0 0 0 4.978v2.046c0 .356.287.643.643.643h3.69v3.691c0 .356.288.643.644.643h2.046a.641.641 0 0 0 .643-.643v-3.69h3.691A.641.641 0 0 0 12 7.022Z"
-                    id="b"
-                  />
-                </defs>
-                <use
-                  fill="#FF7E1B"
-                  fillRule="nonzero"
-                  xlinkHref="#b"
-                  id="plus"
-                />
-              </svg>
-            </div>
-          </div>
-
-          <button
-            type="button"
-            onClick={removeItem}
-            className="w-full h-10 bg-orange-500 text-white py-2 flex items-center justify-center gap-4 text-xs rounded-lg font-bold text-light shadow-md shadow-orange-500 hover:brightness-125 transition select-none"
-          >
-            remove
-          </button>
-
+        <div className="mb-16 flex flex-col gap-5 sm:flex-row lg:mb-0">
           <button
             type="button"
             onClick={addItem}
-            className="w-full h-10 bg-orange-500 text-white py-2 flex items-center justify-center gap-4 text-xs rounded-lg font-bold text-light shadow-md shadow-orange-500 hover:brightness-125 transition select-none"
+            className="flex h-12 w-full select-none  items-center justify-center gap-4 rounded-full bg-purple-600  py-2 font-bold  text-white shadow-md  transition hover:brightness-125"
           >
             <svg
               width={16}

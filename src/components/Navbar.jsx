@@ -4,17 +4,26 @@ import ThemeToggle from "./ThemeToggle";
 import { useSelector } from "react-redux";
 import { cartSelector } from "@/reducers/cartSlice";
 import Cart from "./Cart";
+import CartLogo from "../../public/cart.png";
+import Image from "next/image";
 
 export default function Navbar() {
-  const cartItems = useSelector(cartSelector);
+  const cart = useSelector(cartSelector);
 
   return (
     <div className="fixed inset-x-0 top-0 z-50 flex h-20 items-center justify-between border-b border-slate-300 bg-white/75 shadow-sm backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900/75 ">
-      <div className="container px-6  mx-auto flex w-full max-w-7xl items-center justify-between">
-        <Link href="/" className="">
-          Home
+      <div className="container mx-auto  flex w-full max-w-7xl items-center justify-between px-6">
+        <Link href="/" className="relative flex items-center  ">
+          <Image
+            src={CartLogo}
+            alt="cart logo"
+            className="h-8 w-8 object-contain"
+          />
+          <span className=" hidden px-2 text-xl font-semibold sm:block">
+            Shopcart
+          </span>
         </Link>
-        <div className="md:hidden flex items-center gap-2">
+        <div className="flex items-center gap-2 md:hidden">
           <Link href={"/shop"}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -22,7 +31,7 @@ export default function Navbar() {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-8 h-8"
+              className="h-8 w-8"
             >
               <path
                 strokeLinecap="round"
@@ -39,7 +48,7 @@ export default function Navbar() {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-8 h-8"
+                className="h-8 w-8"
               >
                 <path
                   strokeLinecap="round"
@@ -49,18 +58,18 @@ export default function Navbar() {
               </svg>
             </Link>
 
-            <div className="absolute top-0 right-0  bg-red-600 block text-center text-white rounded-full text-[10px] h-4 w-4 ">
-              {cartItems.length}
+            <div className="absolute top-0 right-0  block h-4 w-4 rounded-full bg-red-600 text-center text-[10px] text-white ">
+              {cart.items.length}
             </div>
           </div>
           <ThemeToggle />
         </div>
-        <div className="hidden gap-4 md:flex items-center justify-center relative">
+        <div className="hidden items-center justify-center gap-4 md:flex">
           <Link href={"/shop"}>Shop</Link>
           <Link href={"/about"}>About</Link>
           <Link href={"/cart"}> Cart</Link>
-          <div className=" bg-gray-400 block text-center text-white rounded-full h-6 w-6 ">
-            {cartItems.length}
+          <div className=" block h-6 w-6 rounded-full bg-gray-400 text-center text-white ">
+            {cart.items.length}
           </div>
           <ThemeToggle />
         </div>
