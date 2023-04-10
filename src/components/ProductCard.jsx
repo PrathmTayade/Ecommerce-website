@@ -1,11 +1,20 @@
-
 import Image from "next/image";
 import Link from "next/link";
 
 function ProductCard({ product }) {
-  const newProd = product.id.substring(product.id.indexOf("/Product/") );
+  const newProd = product.id.substring(product.id.indexOf("/Product/"));
+
+  const item = {
+    id: product.id,
+    title: product.title,
+    image: product.featuredImage.url,
+    quantity: 1,
+    price: product.variants.edges[0].node.price.amount * 50,
+  };
+
+  const price = product.variants.edges[0].node.price.amount * 50;
   return (
-    <div className="flex justify-center m-2 ">
+    <div className="m-2 flex justify-center ">
       <div className="block max-w-sm rounded-lg bg-white shadow-lg dark:bg-neutral-700">
         <Link href={`/shop/${newProd}`}>
           <div className="w-full">
@@ -25,16 +34,26 @@ function ProductCard({ product }) {
           <div className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
             {product.title}
           </div>
-          <div>
-            
+          <div className="flex justify-between">
+            {/* Price of the product */}
+            <div className="text-lg">&#8377; {price}</div>
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="h-6 w-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                />
+              </svg>
+            </div>
           </div>
-
-          <button
-            type="button"
-            className="inline-block rounded bg-orange-500  px-6 pt-2.5 pb-2 text-xs font-bold uppercase leading-normal  focus:outline-none focus:ring-0 active:bg-primary-700 "
-          >
-            add to cart
-          </button>
         </div>
       </div>
     </div>

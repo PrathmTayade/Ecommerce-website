@@ -62,16 +62,16 @@ export default function Navbar() {
               {cart.items.length}
             </div>
           </div>
-          <ThemeToggle />
+          {/* <ThemeToggle /> */}
         </div>
         <div className="hidden items-center justify-center gap-4 md:flex">
           <Link href={"/shop"}>Shop</Link>
           <Link href={"/about"}>About</Link>
           <Link href={"/cart"}> Cart</Link>
-          <div className=" block h-6 w-6 rounded-full bg-gray-400 text-center text-white ">
+          <div className=" block h-6 w-6 rounded-full bg-red-400 text-center text-white ">
             {cart.items.length}
           </div>
-          <ThemeToggle />
+          {/* <ThemeToggle /> */}
         </div>
       </div>
     </div>

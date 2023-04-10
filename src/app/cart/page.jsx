@@ -48,12 +48,12 @@ function Page() {
               <div className="text-lg font-bold">Summary</div>
 
               <div className="my-5 rounded-xl bg-black/[0.05] p-5">
-                <div className="flex justify-between">
-                  <div className="text-md font-medium uppercase text-black md:text-lg">
+                <div className="flex items-center justify-between">
+                  <div className=" text-base font-medium uppercase text-black md:text-lg">
                     Subtotal
                   </div>
-                  <div className="text-md font-medium text-black md:text-lg">
-                    &#8377;{cart.total} 
+                  <div className=" text-3xl  font-medium text-black">
+                    &#8377;{cart.total}
                   </div>
                 </div>
                 <div className="md:text-md mt-5 border-t py-5 text-sm">
