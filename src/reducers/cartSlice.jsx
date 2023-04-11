@@ -34,6 +34,10 @@ export const cartSlice = createSlice({
     },
     decrease: (state, action) => {
       const cartItem = state.items.find((item) => item.id === action.payload);
+
+      if (cartItem.quantity <= 1) {
+        return;
+      }
       cartItem.quantity -= 1;
     },
     calculateTotal: (state) => {

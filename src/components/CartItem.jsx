@@ -31,10 +31,10 @@ const CartItem = ({ data }) => {
       </div>
       {/* IMAGE END */}
 
-      <div className="flex w-full flex-col">
+      <div className="flex w-full flex-col dark:text-white ">
         <div className="flex flex-col justify-between md:flex-row">
           {/* PRODUCT TITLE */}
-          <div className="text-lg font-semibold text-black/[0.8] md:text-2xl">
+          <div className="text-lg font-semibold text-black/[0.8]  md:text-2xl">
             {data.title}
           </div>
 

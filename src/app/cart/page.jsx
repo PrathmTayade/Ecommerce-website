@@ -21,7 +21,7 @@ function Page() {
   };
 
   return (
-    <div className="mx-auto w-full max-w-[1280px] px-5 md:px-10">
+    <div className="mx-auto w-full py-4 max-w-[1280px] px-5 md:px-10">
       {cartItems.length > 0 && (
         <>
           {/* HEADING AND PARAGRAPH START */}

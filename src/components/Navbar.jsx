@@ -12,12 +12,12 @@ export default function Navbar() {
 
   return (
     <div className="fixed inset-x-0 top-0 z-50 flex h-20 items-center justify-between border-b border-slate-300 bg-white/75 shadow-sm backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900/75 ">
-      <div className="container mx-auto  flex w-full max-w-7xl items-center justify-between px-6">
+      <div className="container mx-auto   flex w-full max-w-7xl items-center justify-between px-6">
         <Link href="/" className="relative flex items-center  ">
           <Image
             src={CartLogo}
             alt="cart logo"
-            className="h-8 w-8 object-contain"
+            className="h-10 w-10 object-contain"
           />
           <span className=" hidden px-2 text-xl font-semibold sm:block">
             Shopcart
