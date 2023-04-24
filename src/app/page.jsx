@@ -3,15 +3,18 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="relative bg-white pt-24  pb-[110px] ">
+    <main className="relative bg-slate-50  pt-24  pb-[110px] text-gray-900 dark:bg-slate-900  dark:text-slate-100 ">
       <div className="container mx-auto">
         <div className="flex flex-wrap items-center  px-5">
           <div className="w-full px-4 py-20  lg:w-5/12">
             <div className="flex flex-col justify-center gap-5    ">
-              <h1 className="text-dark mb-3 text-4xl font-bold leading-snug sm:text-[42px] text-purple-500 lg:text-[40px] xl:text-[42px]">
+              <h1 className="text-dark mb-3 text-4xl font-bold leading-snug text-purple-500 sm:text-[42px] lg:text-[40px] xl:text-[42px]">
                 Shopcart Website
                 <br />
-                <span className="text-orange-500 underline"> Mega Sale 50 % off</span>
+                <span className="text-orange-500 underline">
+                  {" "}
+                  Mega Sale 50 % off
+                </span>
               </h1>
               <p className="text-body-color mb-8 max-w-[480px] text-base">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione

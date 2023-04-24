@@ -17,7 +17,7 @@ const CartItem = ({ data }) => {
   };
 
   return (
-    <div className="flex gap-3 border-b py-5 md:gap-5">
+    <div className="flex gap-3 border-b  py-5 text-gray-800 dark:text-gray-100 md:gap-5">
       {/* IMAGE START */}
       <div className="w-15 aspect-square shrink-0 overflow-hidden rounded-lg md:w-32 ">
         <Image
@@ -31,31 +31,31 @@ const CartItem = ({ data }) => {
       </div>
       {/* IMAGE END */}
 
-      <div className="flex w-full flex-col dark:text-white ">
+      <div className="flex w-full flex-col text-gray-800 dark:text-gray-100 ">
         <div className="flex flex-col justify-between md:flex-row">
           {/* PRODUCT TITLE */}
-          <div className="text-lg font-semibold text-black/[0.8]  md:text-2xl">
+          <div className="text-lg font-semibold   md:text-2xl">
             {data.title}
           </div>
 
           {/* PRODUCT SUBTITLE */}
-          <div className="md:text-md block text-sm font-medium text-black/[0.5] md:hidden">
+          <div className="md:text-md block text-sm font-medium  md:hidden">
             subtitle
           </div>
 
           {/* PRODUCT PRICE */}
-          <div className="md:text-md mt-2 text-sm font-bold text-black/[0.5]">
+          <div className="md:text-md mt-2 text-sm font-bold ">
             MRP : &#8377;{data.price * data.quantity}
           </div>
         </div>
 
         {/* PRODUCT SUBTITLE */}
-        <div className="text-md hidden font-medium text-black/[0.5] md:block">
+        <div className="text-md hidden font-medium  md:block">
           subtitle
         </div>
 
         <div className="mt-4 flex items-center justify-between">
-          <div className="md:text-md flex items-center gap-2 text-sm text-black/[0.5] md:gap-10">
+          <div className="md:text-md flex items-center gap-2 text-sm md:gap-10">
             <div className="flex items-center gap-1">
               <div className="flex h-10 w-full items-center justify-between  gap-6  rounded-lg border px-3 text-sm font-bold shadow-sm  ">
                 <button

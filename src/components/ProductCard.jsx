@@ -14,8 +14,8 @@ function ProductCard({ product }) {
 
   const price = product.variants.edges[0].node.price.amount * 50;
   return (
-    <div className="m-2 flex justify-center ">
-      <div className="block max-w-sm rounded-lg bg-white shadow-lg dark:bg-neutral-700">
+    <div className="m-2 flex justify-center  ">
+      <div className="block max-w-sm overflow-hidden rounded-lg bg-white shadow-lg dark:bg-gray-800">
         <Link href={`/shop/${newProd}`}>
           <div className="w-full">
             <Image
@@ -30,8 +30,8 @@ function ProductCard({ product }) {
             {/* <img src={product.featuredImage.url} alt="product img" /> */}
           </div>
         </Link>
-        <div className="p-6">
-          <div className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+        <div className="bg p-6">
+          <div className="mb-2 text-xl font-medium leading-tight text-gray-800 dark:text-slate-50">
             {product.title}
           </div>
           <div className="flex justify-between">

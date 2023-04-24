@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 function Providers({ children }) {
   return (
     <Provider store={store}>
-      <ThemeProvider attribute="class" defaultTheme="light">
+      <ThemeProvider attribute="class" defaultTheme="light" >
         {children}
       </ThemeProvider>
     </Provider>

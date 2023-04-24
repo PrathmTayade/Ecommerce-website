@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
   return (
     <ServerThemeProvider attribute="class">
       <html lang="en" suppressHydrationWarning>
-        <body className="">
+        <body className="bg-white dark:bg-slate-900  ">
           <Providers>
             <Navbar />
             {children}

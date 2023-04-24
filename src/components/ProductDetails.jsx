@@ -39,7 +39,7 @@ function ProductDetails({ data, id }) {
     dispatch(increase({ id }));
   };
   return (
-    <main className="flex w-full  flex-col pt-4 lg:flex-row">
+    <main className="flex w-full min-h-max    flex-col  pt-4 lg:flex-row">
       {/* Gallery */}
       {/* <img
         src="//cdn.shopify.com/s/files/1/0688/1755/1382/products/Whiteleathersneakers01.jpg?v=1675447604&amp;width=1946"
@@ -49,8 +49,8 @@ function ProductDetails({ data, id }) {
         width="1946"
         height="1946"
       ></img> */}
-      <div className="flex">
-        {/* {pathname
+      {/* <div className="flex">
+        {pathname
           .split("/")
           .slice(1)
           .map((segment) => {
@@ -68,8 +68,8 @@ function ProductDetails({ data, id }) {
                 <span className="text-zinc-600">/</span>
               </div>
             );
-          })} */}
-      </div>
+          })}
+      </div> */}
 
       <section className="h-fit flex-1 flex-col gap-8 sm:mx-2 sm:flex sm:h-full sm:flex-row  sm:gap-4 md:mx-4 md:gap-8 lg:mx-0 lg:flex-col">
         <div className="relative flex items-center bg-orange-500 sm:bg-transparent ">

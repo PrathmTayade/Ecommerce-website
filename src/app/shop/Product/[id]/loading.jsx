@@ -1,9 +1,10 @@
-import React from 'react'
+import React from "react";
 
 const Loading = () => {
+ 
   return (
-    <div className='bg-slate-500'>Loading product </div>
-  )
-}
+    <div>loading product</div>
+  );
+};
 
-export default Loading
+export default Loading;

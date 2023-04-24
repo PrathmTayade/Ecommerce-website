@@ -5,8 +5,8 @@ async function Page({ params }) {
   const data = await getProductDetails(params.id);
 
   return (
-    <main>
-      <ProductDetails data={data} id={params.id} />;
+    <main className=" dark:bg-slate-900 ">
+      <ProductDetails data={data} id={params.id} />
     </main>
   );
 }

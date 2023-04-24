@@ -1,8 +1,6 @@
 import Collections from "@/components/Collections";
 import getCollections from "@/lib/getCollections";
-import Image from "next/image";
-import { Suspense } from "react";
-import Loading from "./loading";
+
 
 // const fetchlog = {
 //   data: {
