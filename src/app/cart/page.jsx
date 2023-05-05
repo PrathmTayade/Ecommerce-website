@@ -5,6 +5,7 @@ import Link from "next/link";
 import { calculateTotal, cartSelector } from "@/reducers/cartSlice";
 import CartItem from "@/components/CartItem";
 
+
 function Page() {
   const cart = useSelector(cartSelector);
   const cartItems = cart.items;
@@ -20,12 +21,14 @@ function Page() {
     dispatch(calculateTotal());
   };
 
+  
+
   return (
     <div className="mx-auto w-full max-w-[1280px] py-4 px-5 md:px-10">
       {cartItems.length > 0 && (
         <>
           {/* HEADING AND PARAGRAPH START */}
-          <div className="mx-auto mt-8 max-w-[800px] text-black dark:text-white text-center md:mt-0">
+          <div className="mx-auto mt-8 max-w-[800px] text-center text-black dark:text-white md:mt-0">
             <div className="mb-5 text-[28px] font-semibold leading-tight md:text-[34px]">
               Shopping Cart
             </div>
@@ -52,7 +55,7 @@ function Page() {
                   <div className=" text-base font-medium uppercase text-black dark:text-white md:text-lg">
                     Subtotal
                   </div>
-                  <div className=" text-3xl  font-medium text-black dark:text-white" >
+                  <div className=" text-3xl  font-medium text-black dark:text-white">
                     &#8377;{cart.total}
                   </div>
                 </div>
@@ -66,7 +69,7 @@ function Page() {
               {/* BUTTON START */}
               <button
                 onClick={caltotal}
-                className="mb-3 flex w-full items-center justify-center gap-2 rounded-full bg-black dark:bg-white py-4 text-lg font-medium text-white dark:text-black transition-transform hover:opacity-75 active:scale-95"
+                className="mb-3 flex w-full items-center justify-center gap-2 rounded-full bg-black py-4 text-lg font-medium text-white transition-transform hover:opacity-75 active:scale-95 dark:bg-white dark:text-black"
                 // onClick={handlePayment}
               >
                 Checkout
@@ -113,7 +116,7 @@ function Page() {
           </span>
           <Link
             href="/shop"
-            className="mb-3 mt-8 rounded-full bg-black dark:bg-slate-50 dark:text-black py-4 px-8 text-lg font-medium text-white transition-transform hover:opacity-75 active:scale-95"
+            className="mb-3 mt-8 rounded-full bg-black py-4 px-8 text-lg font-medium text-white transition-transform hover:opacity-75 active:scale-95 dark:bg-slate-50 dark:text-black"
           >
             Continue Shopping
           </Link>

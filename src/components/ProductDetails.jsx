@@ -10,6 +10,8 @@ import Image from "next/image";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { usePathname } from "next/navigation";
+import { app, db } from "@/firebase/firebaseConfig";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 
 function ProductDetails({ data, id }) {
   const dispatch = useDispatch();
@@ -38,8 +40,18 @@ function ProductDetails({ data, id }) {
   const increment = () => {
     dispatch(increase({ id }));
   };
+
+  //firebase
+  const dbInstace = collection(db, "products");
+
+  const saveProduct = () => {
+    console.log("product saved");
+    addDoc(dbInstace, { item: item });
+  };
+ 
+
   return (
-    <main className="flex w-full min-h-max    flex-col  pt-4 lg:flex-row">
+    <main className="flex min-h-max w-full    flex-col  pt-4 lg:flex-row">
       {/* Gallery */}
       {/* <img
         src="//cdn.shopify.com/s/files/1/0688/1755/1382/products/Whiteleathersneakers01.jpg?v=1675447604&amp;width=1946"
@@ -172,6 +184,13 @@ function ProductDetails({ data, id }) {
             </svg>
             Add to cart
           </button>
+          {/* <button
+            type="button"
+            onClick={()}
+            className="flex h-12 w-full select-none  items-center justify-center gap-4 rounded-full bg-purple-600  py-2 font-bold  text-white shadow-md  transition hover:brightness-125"
+          >
+            save to firebase
+          </button> */}
         </div>
       </section>
     </main>
