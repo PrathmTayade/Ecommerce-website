@@ -1,3 +1,4 @@
+import { removeFromDB } from "@/firebase/cartFunctions";
 import { decrease, increase, removeFromCart } from "@/reducers/cartSlice";
 import Image from "next/image";
 import React from "react";
@@ -8,6 +9,7 @@ const CartItem = ({ data }) => {
 
   const removeItem = () => {
     dispatch(removeFromCart(data.id));
+    removeFromDB(data.id);
   };
   const decrement = () => {
     dispatch(decrease(data.id));
@@ -50,9 +52,7 @@ const CartItem = ({ data }) => {
         </div>
 
         {/* PRODUCT SUBTITLE */}
-        <div className="text-md hidden font-medium  md:block">
-          subtitle
-        </div>
+        <div className="text-md hidden font-medium  md:block">subtitle</div>
 
         <div className="mt-4 flex items-center justify-between">
           <div className="md:text-md flex items-center gap-2 text-sm md:gap-10">

@@ -5,11 +5,10 @@ import Link from "next/link";
 import { calculateTotal, cartSelector } from "@/reducers/cartSlice";
 import CartItem from "@/components/CartItem";
 
-
 function Page() {
   const cart = useSelector(cartSelector);
   const cartItems = cart.items;
-
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,10 +20,8 @@ function Page() {
     dispatch(calculateTotal());
   };
 
-  
-
   return (
-    <div className="mx-auto w-full max-w-[1280px] py-4 px-5 md:px-10">
+    <div className="mx-auto w-full max-w-[1280px] px-5 py-4 md:px-10">
       {cartItems.length > 0 && (
         <>
           {/* HEADING AND PARAGRAPH START */}
@@ -85,7 +82,7 @@ function Page() {
 
       {/* This is empty screen */}
       {cartItems.length < 1 && (
-        <div className="flex flex-[2] flex-col items-center pt-20 pb-[50px] md:-mt-14">
+        <div className="flex flex-[2] flex-col items-center pb-[50px] pt-20 md:-mt-14">
           <div className="h-auto w-56">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -116,7 +113,7 @@ function Page() {
           </span>
           <Link
             href="/shop"
-            className="mb-3 mt-8 rounded-full bg-black py-4 px-8 text-lg font-medium text-white transition-transform hover:opacity-75 active:scale-95 dark:bg-slate-50 dark:text-black"
+            className="mb-3 mt-8 rounded-full bg-black px-8 py-4 text-lg font-medium text-white transition-transform hover:opacity-75 active:scale-95 dark:bg-slate-50 dark:text-black"
           >
             Continue Shopping
           </Link>

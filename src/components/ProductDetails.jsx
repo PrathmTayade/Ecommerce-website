@@ -1,17 +1,15 @@
 "use client";
+import { addToDB, removeFromDB } from "@/firebase/cartFunctions";
 import {
   addToCart,
   cartSelector,
-  increase,
   decrease,
+  increase,
   removeFromCart,
 } from "@/reducers/cartSlice";
 import Image from "next/image";
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { usePathname } from "next/navigation";
-import { app, db } from "@/firebase/firebaseConfig";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { useDispatch, useSelector } from "react-redux";
 
 function ProductDetails({ data, id }) {
   const dispatch = useDispatch();
@@ -28,7 +26,7 @@ function ProductDetails({ data, id }) {
 
   const addItem = () => {
     dispatch(addToCart(item));
-    // console.log(data)
+    addToDB(item);
   };
 
   const removeItem = () => {
@@ -40,15 +38,6 @@ function ProductDetails({ data, id }) {
   const increment = () => {
     dispatch(increase({ id }));
   };
-
-  //firebase
-  const dbInstace = collection(db, "products");
-
-  const saveProduct = () => {
-    console.log("product saved");
-    addDoc(dbInstace, { item: item });
-  };
- 
 
   return (
     <main className="flex min-h-max w-full    flex-col  pt-4 lg:flex-row">
@@ -156,7 +145,7 @@ function ProductDetails({ data, id }) {
             <h3 className="text-very-dark inline-block text-3xl  font-bold">
               ₹ {data.product.variants.edges[0].node.price.amount * 25}
             </h3>
-            <span className="bg-pale-orange-500 inline-block h-fit rounded-lg py-0.5 px-2 text-sm font-bold text-orange-500">
+            <span className="bg-pale-orange-500 inline-block h-fit rounded-lg px-2 py-0.5 text-sm font-bold text-orange-500">
               50%
             </span>
           </div>
@@ -184,13 +173,13 @@ function ProductDetails({ data, id }) {
             </svg>
             Add to cart
           </button>
-          {/* <button
+          <button
             type="button"
-            onClick={()}
+            onClick={() => removeFromDB(item.id)}
             className="flex h-12 w-full select-none  items-center justify-center gap-4 rounded-full bg-purple-600  py-2 font-bold  text-white shadow-md  transition hover:brightness-125"
           >
-            save to firebase
-          </button> */}
+            removeFromCart
+          </button>
         </div>
       </section>
     </main>

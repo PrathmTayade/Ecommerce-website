@@ -6,13 +6,38 @@ import { cartSelector } from "@/reducers/cartSlice";
 import Cart from "./Cart";
 import CartLogo from "../../public/cart.png";
 import Image from "next/image";
+import { getAuth, onAuthStateChanged, signInWithPopup } from "firebase/auth";
+import { logIn, logout, signInWithGoogle } from "@/firebase/auth";
+import { useEffect, useState } from "react";
 
 export default function Navbar() {
+  const [toggleDropdown, setToggleDropdown] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+
   const cart = useSelector(cartSelector);
+
+  const auth = getAuth();
+  const user = auth?.currentUser;
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, handle the authenticated state
+        // For example, you can update the UI, set a flag, or redirect to a protected route
+        console.log("user logged in");
+        setLoggedIn(true);
+      } else {
+        // User is signed out, handle the unauthenticated state
+        // For example, you can clear the user data, update the UI, or redirect to a sign-in page
+        setLoggedIn(false);
+        console.log("user logged out");
+      }
+    });
+  }, [auth]);
 
   return (
     <div className="fixed inset-x-0 top-0 z-50 flex h-20 items-center justify-between border-b border-slate-300 bg-white/75 shadow-sm backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900/75 ">
-      <div className="container mx-auto   flex w-full max-w-7xl items-center justify-between px-6">
+      <div className="container mx-auto  flex w-full max-w-7xl items-center justify-between px-6">
         <Link href="/" className="relative flex items-center  ">
           <Image
             src={CartLogo}
@@ -58,12 +83,14 @@ export default function Navbar() {
               </svg>
             </Link>
 
-            <div className="absolute top-0 right-0  block h-4 w-4 rounded-full bg-red-600 text-center text-[10px] text-white ">
+            <div className="absolute right-0 top-0  block h-4 w-4 rounded-full bg-red-600 text-center text-[10px] text-white ">
               {cart.items.length}
             </div>
           </div>
           <ThemeToggle />
         </div>
+
+        {/* Desktop */}
         <div className="hidden items-center justify-center gap-4 md:flex">
           <Link href={"/shop"}>Shop</Link>
           <Link href={"/about"}>About</Link>
@@ -72,6 +99,18 @@ export default function Navbar() {
             {cart.items.length}
           </div>
           <ThemeToggle />
+
+          <div>
+            {loggedIn ? (
+              <button type="button" onClick={logout}>
+                Logout
+              </button>
+            ) : (
+              <button type="button" onClick={signInWithGoogle}>
+                Login
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>
