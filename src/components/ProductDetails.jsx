@@ -10,6 +10,7 @@ import Image from "next/image";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { usePathname } from "next/navigation";
+import { toast } from "react-hot-toast";
 
 function ProductDetails({ data, id }) {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ function ProductDetails({ data, id }) {
   const addItem = () => {
     dispatch(addToCart(item));
     // console.log(data)
+    toast.success("Item added to cart");
   };
 
   const removeItem = () => {
@@ -39,7 +41,7 @@ function ProductDetails({ data, id }) {
     dispatch(increase({ id }));
   };
   return (
-    <main className="flex w-full min-h-max    flex-col  pt-4 lg:flex-row">
+    <main className="flex min-h-max w-full    flex-col  pt-4 lg:flex-row">
       {/* Gallery */}
       {/* <img
         src="//cdn.shopify.com/s/files/1/0688/1755/1382/products/Whiteleathersneakers01.jpg?v=1675447604&amp;width=1946"
@@ -144,7 +146,7 @@ function ProductDetails({ data, id }) {
             <h3 className="text-very-dark inline-block text-3xl  font-bold">
               ₹ {data.product.variants.edges[0].node.price.amount * 25}
             </h3>
-            <span className="bg-pale-orange-500 inline-block h-fit rounded-lg py-0.5 px-2 text-sm font-bold text-orange-500">
+            <span className="bg-pale-orange-500 inline-block h-fit rounded-lg px-2 py-0.5 text-sm font-bold text-orange-500">
               50%
             </span>
           </div>
