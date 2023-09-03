@@ -3,6 +3,7 @@ import Providers from "@/components/Providers";
 import { ServerThemeProvider } from "next-themes";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
 
 export const metadata = {
   title: "Next app",
@@ -15,6 +16,9 @@ export default function RootLayout({ children }) {
       <html lang="en" suppressHydrationWarning>
         <body className="bg-white dark:bg-slate-900  ">
           <Providers>
+            <div>
+              <Toaster />
+            </div>
             <Navbar />
             {children}
           </Providers>

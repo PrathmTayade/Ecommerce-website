@@ -3,10 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const cartSlice = createSlice({
   name: "cart",
   initialState: {
-    items: [
-      // { id: "sadjias", title: "prod 1", image: "", quantity: 1, price: 100 },
-      // { id: "dsaodsad", title: "prod 2", image: "", quantity: 2, price: 100 },
-    ],
+    items: [],
     quantity: 1,
     amount: 0,
     total: 0,
@@ -24,6 +21,10 @@ export const cartSlice = createSlice({
       } else {
         state.items.push(action.payload);
       }
+      state.total = state.items.reduce(
+        (total, item) => total + item.price * item.quantity,
+        0
+      );
     },
     removeFromCart: (state, action) => {
       state.items = state.items.filter((items) => items.id !== action.payload);
@@ -31,6 +32,11 @@ export const cartSlice = createSlice({
     increase: (state, action) => {
       const cartItem = state.items.find((item) => item.id === action.payload);
       cartItem.quantity += 1;
+
+      state.total = state.items.reduce(
+        (total, item) => total + item.price * item.quantity,
+        0
+      );
     },
     decrease: (state, action) => {
       const cartItem = state.items.find((item) => item.id === action.payload);
@@ -39,6 +45,11 @@ export const cartSlice = createSlice({
         return;
       }
       cartItem.quantity -= 1;
+
+      state.total = state.items.reduce(
+        (total, item) => total + item.price * item.quantity,
+        0
+      );
     },
     calculateTotal: (state) => {
       let amount = 0;
