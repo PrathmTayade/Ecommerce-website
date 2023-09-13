@@ -1,0 +1,4 @@
+//? Can uncomment rename the file to middleware.js and the routes mentioned in the matchers will only be protected with nextauth
+export { default } from "next-auth/middleware";
+
+export const config = { matcher: ["/about"] };

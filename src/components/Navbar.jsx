@@ -6,9 +6,12 @@ import { cartSelector } from "@/reducers/cartSlice";
 import Cart from "./Cart";
 import CartLogo from "../../public/cart.png";
 import Image from "next/image";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function Navbar() {
   const cart = useSelector(cartSelector);
+
+  const { data: session, status } = useSession();
 
   return (
     <div className="fixed inset-x-0 top-0 z-50 flex h-20 items-center justify-between border-b border-slate-300 bg-white/75 shadow-sm backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900/75 ">
@@ -68,6 +71,18 @@ export default function Navbar() {
           <Link href={"/shop"}>Shop</Link>
           <Link href={"/about"}>About</Link>
           <Link href={"/cart"}> Cart</Link>
+
+          {/* TODO add the user menu option avatar */}
+          {status === "unauthenticated" ? (
+            <button type="button" onClick={() => signIn()}>
+              Login
+            </button>
+          ) : (
+            <button type="button" onClick={() => signOut()}>
+              Log out
+            </button>
+          )}
+
           <div className=" block h-6 w-6 rounded-full bg-red-400 text-center text-white ">
             {cart.items.length}
           </div>
