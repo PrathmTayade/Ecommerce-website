@@ -28,28 +28,27 @@ const handler = NextAuth({
       },
       async authorize(credentials, req) {
         // Add logic here to look up the user from the credentials supplied
-        // const { email, password } = credentials ?? {};
-        // if (!email || !password) {
-        //   throw new Error("Missing username or password");
-        // }
-        // const user = await prisma.User.findUnique({
-        //   where: {
-        //     email: email,
-        //   },
-        // });
-        // // if user doesn't exist or password doesn't match
-        // if (!user || !(await compare(password, user.hashedPassword))) {
-        //   throw new Error("Invalid username or password");
-        // }
-        const user = { ...credentials };
+        const { email, password } = credentials ?? {};
+        if (!email || !password) {
+          throw new Error("Missing username or password");
+        }
+        const user = await prisma.User.findUnique({
+          where: {
+            email: email,
+          },
+        });
+        // if user doesn't exist or password doesn't match
+        if (!user || !(await compare(password, user.hashedPassword))) {
+          throw new Error("Invalid username or password");
+        }
         return user;
       },
     }),
 
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    }),
+    // GoogleProvider({
+    //   clientId: process.env.GOOGLE_CLIENT_ID,
+    //   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    // }),
   ],
   session: {
     strategy: "jwt",
@@ -57,15 +56,15 @@ const handler = NextAuth({
   },
 
   // TODO set up callbacks based on accounts providers to check for user or save it for both google and credentials
-  callbacks: {
-    async session({ session, token }) {
-      // session.user = token.user;
-      return session;
-    },
-    async signIn({ user, account, profile, credentials }) {
-      console.log(user, account, profile, credentials);
-    },
-  },
+  // callbacks: {
+  //   async session({ session, token }) {
+  //     // session.user = token.user;
+  //     return session;
+  //   },
+  //   async signIn({ user, account, profile, credentials }) {
+  //     console.log(user, account, profile, credentials);
+  //   },
+  // },
 });
 
 export { handler as GET, handler as POST };
