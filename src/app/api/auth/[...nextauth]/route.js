@@ -2,7 +2,12 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import prisma from "@/lib/prismaDB";
+import { compare } from "bcrypt";
+
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+
 const handler = NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
@@ -14,35 +19,29 @@ const handler = NextAuth({
       // e.g. domain, username, password, 2FA token, etc.
       // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
-        username: {
-          label: "Username",
-          type: "text",
-          placeholder: "Cool Username",
+        email: {
+          label: "Email",
+          type: "email",
+          placeholder: "Cool email",
         },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        // TODO setup with database to verify the user
         // Add logic here to look up the user from the credentials supplied
-        const user = {
-          id: "1",
-          name: "John Doe",
-          email: "jsmith@example.com",
-          username: "JohnD1",
-          password: "123456",
-        };
-
-        if (
-          credentials?.username === user.username &&
-          credentials?.password === user.password
-        ) {
-          return user;
-        } else {
-          // If you return null then an error will be displayed advising the user to check their details.
-          return null;
-
-          // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
+        const { email, password } = credentials ?? {};
+        if (!email || !password) {
+          throw new Error("Missing username or password");
         }
+        const user = await prisma.User.findUnique({
+          where: {
+            email: email,
+          },
+        });
+        // if user doesn't exist or password doesn't match
+        if (!user || !(await compare(password, user.hashedPassword))) {
+          throw new Error("Invalid username or password");
+        }
+        return user;
       },
     }),
 
@@ -51,6 +50,9 @@ const handler = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
+  session: {
+    strategy: "jwt",
+  },
 });
 
 export { handler as GET, handler as POST };
