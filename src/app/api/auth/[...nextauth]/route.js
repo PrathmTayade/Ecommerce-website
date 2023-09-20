@@ -9,7 +9,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 const handler = NextAuth({
-  adapter: PrismaAdapter(prisma),
+  // adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
       // The name to display on the sign in form (e.g. "Sign in with...")
@@ -28,19 +28,20 @@ const handler = NextAuth({
       },
       async authorize(credentials, req) {
         // Add logic here to look up the user from the credentials supplied
-        const { email, password } = credentials ?? {};
-        if (!email || !password) {
-          throw new Error("Missing username or password");
-        }
-        const user = await prisma.User.findUnique({
-          where: {
-            email: email,
-          },
-        });
-        // if user doesn't exist or password doesn't match
-        if (!user || !(await compare(password, user.hashedPassword))) {
-          throw new Error("Invalid username or password");
-        }
+        // const { email, password } = credentials ?? {};
+        // if (!email || !password) {
+        //   throw new Error("Missing username or password");
+        // }
+        // const user = await prisma.User.findUnique({
+        //   where: {
+        //     email: email,
+        //   },
+        // });
+        // // if user doesn't exist or password doesn't match
+        // if (!user || !(await compare(password, user.hashedPassword))) {
+        //   throw new Error("Invalid username or password");
+        // }
+        const user = { ...credentials };
         return user;
       },
     }),
@@ -52,6 +53,18 @@ const handler = NextAuth({
   ],
   session: {
     strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60,
+  },
+
+  // TODO set up callbacks based on accounts providers to check for user or save it for both google and credentials
+  callbacks: {
+    async session({ session, token }) {
+      // session.user = token.user;
+      return session;
+    },
+    async signIn({ user, account, profile, credentials }) {
+      console.log(user, account, profile, credentials);
+    },
   },
 });
 
