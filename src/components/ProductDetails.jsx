@@ -27,7 +27,7 @@ function ProductDetails({ data, id }) {
 
   const addItem = () => {
     dispatch(addToCart(item));
-    // console.log(data)
+    console.log("data", data);
     toast.success("Item added to cart");
   };
 

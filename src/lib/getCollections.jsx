@@ -4,8 +4,7 @@ export default async function getCollections() {
       "https://mock.shop/api?query={collections(first:%2010){edges%20{node%20{id%20handle%20title%20image%20{altText%20url}}}}}"
     );
 
-
-    //DEAly to check out loading animations 
+    //DEAly to check out loading animations
 
     // const request = await delayFetch(
     //   "https://mock.shop/api?query={collections(first:%2010){edges%20{node%20{id%20handle%20title%20image%20{altText%20url}}}}}",

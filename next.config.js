@@ -1,9 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
-
   images: {
     remotePatterns: [
       {
@@ -13,6 +9,9 @@ const nextConfig = {
         pathname: "/s/files/1/0688/1755/1382/**",
       },
     ],
+  },
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
   },
 };
 
