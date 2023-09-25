@@ -1,4 +1,4 @@
-import { decrease, increase, removeFromCart } from "@/reducers/cartSlice";
+import { decrease, increase, removeItem } from "@/reducers/cartSlice";
 import Image from "next/image";
 import React from "react";
 import { useDispatch } from "react-redux";
@@ -6,8 +6,8 @@ import { useDispatch } from "react-redux";
 const CartItem = ({ data }) => {
   const dispatch = useDispatch();
 
-  const removeItem = () => {
-    dispatch(removeFromCart(data.id));
+  const removeFromCart = () => {
+    dispatch(removeItem(data.id));
   };
   const decrement = () => {
     dispatch(decrease(data.id));
@@ -50,9 +50,7 @@ const CartItem = ({ data }) => {
         </div>
 
         {/* PRODUCT SUBTITLE */}
-        <div className="text-md hidden font-medium  md:block">
-          subtitle
-        </div>
+        <div className="text-md hidden font-medium  md:block">subtitle</div>
 
         <div className="mt-4 flex items-center justify-between">
           <div className="md:text-md flex items-center gap-2 text-sm md:gap-10">
@@ -106,7 +104,7 @@ const CartItem = ({ data }) => {
               </div>
             </div>
           </div>
-          <button type="button " onClick={removeItem}>
+          <button type="button " onClick={removeFromCart}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"

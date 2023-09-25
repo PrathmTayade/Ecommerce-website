@@ -1,16 +1,12 @@
 "use client";
 import {
-  addToCart,
-  cartSelector,
-  increase,
-  decrease,
-  removeFromCart,
+  addItem,
+  cartSelector
 } from "@/reducers/cartSlice";
 import Image from "next/image";
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { usePathname } from "next/navigation";
 import { toast } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 
 function ProductDetails({ data, id }) {
   const dispatch = useDispatch();
@@ -25,21 +21,12 @@ function ProductDetails({ data, id }) {
     price: data.product.variants.edges[0].node.price.amount * 50,
   };
 
-  const addItem = () => {
-    dispatch(addToCart(item));
+  const addToCart = () => {
+    dispatch(addItem(item));
     console.log("data", data);
     toast.success("Item added to cart");
   };
 
-  const removeItem = () => {
-    dispatch(removeFromCart(id));
-  };
-  const decrement = () => {
-    dispatch(decrease({ id }));
-  };
-  const increment = () => {
-    dispatch(increase({ id }));
-  };
   return (
     <main className="flex min-h-max w-full    flex-col  pt-4 lg:flex-row">
       {/* Gallery */}
@@ -157,7 +144,7 @@ function ProductDetails({ data, id }) {
         <div className="mb-16 flex flex-col gap-5 sm:flex-row lg:mb-0">
           <button
             type="button"
-            onClick={addItem}
+            onClick={addToCart}
             className="flex h-12 w-full select-none  items-center justify-center gap-4 rounded-full bg-purple-600  py-2 font-bold  text-white shadow-md  transition hover:brightness-125"
           >
             <svg

@@ -1,24 +1,15 @@
 "use client";
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Link from "next/link";
-import { calculateTotal, cartSelector } from "@/reducers/cartSlice";
 import CartItem from "@/components/CartItem";
+import { cartSelector } from "@/reducers/cartSlice";
+import Link from "next/link";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 
 function Page() {
   const cart = useSelector(cartSelector);
   const cartItems = cart.items;
 
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(calculateTotal());
-  // }, [cartItems]);
-
-  const caltotal = () => {
-    console.log(cart.total);
-    dispatch(calculateTotal());
-  };
 
   return (
     <div className="mx-auto w-full max-w-[1280px] px-5 py-4 md:px-10">
@@ -65,7 +56,9 @@ function Page() {
 
               {/* BUTTON START */}
               <button
-                onClick={caltotal}
+                onClick={() =>
+                  toast.error("Payment gateway is not available right now")
+                }
                 className="mb-3 flex w-full items-center justify-center gap-2 rounded-full bg-black py-4 text-lg font-medium text-white transition-transform hover:opacity-75 active:scale-95 dark:bg-white dark:text-black"
                 // onClick={handlePayment}
               >
